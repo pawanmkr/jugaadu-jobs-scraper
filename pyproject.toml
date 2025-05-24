@@ -14,3 +14,5 @@ dependencies = [
 
 [tool.ruff]
 src = ["src"]
+line-length = 100
+extend-select = ["I", "N", "UP"]

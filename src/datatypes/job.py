@@ -1,17 +1,18 @@
-from typing import TypedDict, List, Optional
+from typing import TypedDict
+
 
 class Job(TypedDict):
     title: str
-    logoPath: Optional[str]
-    logoPathV3: Optional[str]
+    logoPath: str | None
+    logoPathV3: str | None
     jobId: str
     currency: str
     footerPlaceholderLabel: str
     footerPlaceholderColor: str
     companyName: str
     isSaved: bool
-    tagsAndSkills: List[str]
-    placeholders: List[str]
+    tagsAndSkills: list[str]
+    placeholders: list[str]
     companyId: str
     jdURL: str
     staticUrl: str
