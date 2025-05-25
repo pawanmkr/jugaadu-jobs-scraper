@@ -13,7 +13,10 @@ dependencies = [
     "sqlalchemy>=2.0.41",
 ]
 
+[dependency-groups]
+dev = ["black>=25.1.0"]
+
 [tool.ruff]
-src = ["src"]
-line-length = 100
-extend-select = ["I", "N", "UP"]
+lint.extend-select = ['ALL']
+# select = ["E", "F", "I"]
+lint.ignore = ['D103', 'W291', 'COM812', 'D104', 'D100', 'ERA001']

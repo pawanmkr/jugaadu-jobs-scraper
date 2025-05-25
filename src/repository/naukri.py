@@ -1,8 +1,8 @@
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from src.db.models.naukri import Naukri
 from src.datatypes.job import Job
+from src.db.models.naukri import Naukri
 
 
 async def create_naukri(db: AsyncSession, job: Job, keyword: str) -> Naukri:

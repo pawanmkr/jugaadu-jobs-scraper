@@ -1,9 +1,12 @@
+from collections.abc import AsyncGenerator
+
 from sqlalchemy.ext.asyncio import (
     AsyncEngine,
     AsyncSession,
     async_sessionmaker,
     create_async_engine,
 )
+
 from src.db.models.base import BaseModel
 
 DATABASE_URL = "sqlite+aiosqlite:///./naukri.db"
@@ -11,7 +14,7 @@ DATABASE_URL = "sqlite+aiosqlite:///./naukri.db"
 # Create the async engine
 engine: AsyncEngine = create_async_engine(
     DATABASE_URL,
-    echo=True,  # Set to False in production
+    echo=False,  # Set to False in production
     future=True,
 )
 
@@ -22,13 +25,13 @@ AsyncSessionLocal = async_sessionmaker(
     expire_on_commit=False,
 )
 
-async def get_session():
+
+async def get_session() -> AsyncGenerator[AsyncSession, None]:
+    """Async generator that yields a database session."""
     async with AsyncSessionLocal() as session:
         yield session
 
-# Initialize DB and create tables
-async def init_models():
-    # Ensure all models are imported before metadata.create_all
 
+async def init_models() -> None:
     async with engine.begin() as conn:
         await conn.run_sync(BaseModel.metadata.create_all)

@@ -18,3 +18,7 @@ wheels/
 
 # mac
 .DS_Store
+
+# other
+learnings.js
+*.db

@@ -6,24 +6,31 @@ from typing import Callable  # noqa: UP035
 
 logger = logging.getLogger(__name__)
 
+
 # avoid ip-block by naukri.com using breaks
-def take_a_break(i: int):
+def take_a_break(i: int) -> None:
     if i % 3 == 0:
-        delay = random.uniform(5, 10)
-        logger.info(f"[WAIT] Longer pause: {delay:.2f} seconds")
+        # delay = random.uniform(5, 10)
+        delay = random.uniform(0.5, 2)
+        msg = f"⏱️ Longer pause: {delay:.2f} seconds"
+        logger.info(msg)
         time.sleep(delay)
     else:
-        delay = random.uniform(2, 5)
-        logger.info(f"[WAIT] Sleeping for {delay:.2f} seconds...")
+        # delay = random.uniform(2, 5)
+        delay = random.uniform(0.2, 1)
+        msg = f"⏱️ Sleeping for {delay:.2f} seconds..."
+        logger.info(msg)
         time.sleep(delay)
 
 
-async def retry_with_backoff(fn: Callable, retries: int = 5):
+async def retry_with_backoff(fn: Callable, retries: int = 5) -> None:
     for attempt in range(retries):
         try:
             return await fn()
         except Exception as e:
-            wait = 2 ** attempt + random.uniform(0.5, 1.5)
-            logger.warning(f"[RETRY] Attempt {attempt+1}/{retries} failed: {e}. Retrying in {wait:.2f}s")
+            wait = 2**attempt + random.uniform(0.5, 1.5)
+            logger.warning(
+                f"🔄 Attempt {attempt + 1}/{retries} failed: {e}. Retrying in {wait:.2f}s",
+            )
             await asyncio.sleep(wait)
-    raise Exception(f"[FAILURE] All {retries} retry attempts failed.")
+    raise Exception(f"❌ All {retries} retry attempts failed.")
