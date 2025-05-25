@@ -1,3 +1,4 @@
+# ruff: noqa: E501
 from urllib.parse import quote
 
 import httpx
@@ -5,7 +6,7 @@ import httpx
 from src.utils import retry_with_backoff
 
 
-async def make_naukri_request(keyword: str, offset: int):
+async def make_naukri_request(keyword: str, offset: int) -> httpx.Response:
     base_url = "https://www.naukri.com/jobapi/v3/search"
     limit = 20
     encoded_keyword = quote(keyword)
@@ -42,5 +43,5 @@ async def make_naukri_request(keyword: str, offset: int):
         return response
 
 
-async def safe_naukri_request(keyword, offset):
+async def safe_naukri_request(keyword: str, offset: int) -> httpx.Response:
     return await retry_with_backoff(lambda: make_naukri_request(keyword, offset))

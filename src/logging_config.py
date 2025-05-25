@@ -1,14 +1,14 @@
 import logging
-import os
 from logging.handlers import RotatingFileHandler
+from pathlib import Path
 
 LOG_DIR = "logs"
 LOG_FILE = "naukri_scraper.log"
 
-os.makedirs(LOG_DIR, exist_ok=True)
+Path(LOG_DIR).mkdir(parents=True)
 
 
-def silence_noisy_logs():
+def silence_noisy_logs() -> None:
     noisy_loggers = [
         "aiosqlite",
         "sqlalchemy.engine.Engine",
@@ -28,15 +28,15 @@ def silence_noisy_logs():
         )
 
 
-def setup_logging():
+def setup_logging() -> None:
     log_formatter = logging.Formatter(
         "[%(asctime)s] [%(levelname)s] %(name)s: %(message)s"
     )
 
     file_handler = RotatingFileHandler(
-        os.path.join(LOG_DIR, LOG_FILE),
+        Path(LOG_DIR) / LOG_FILE,
         maxBytes=1_000_000,  # 1 MB per file
-        backupCount=3,
+        backupCount=10,
     )
     file_handler.setFormatter(log_formatter)
     file_handler.setLevel(logging.INFO)

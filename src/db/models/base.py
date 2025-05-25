@@ -7,7 +7,8 @@ from sqlalchemy.orm import DeclarativeBase, Mapped, declared_attr, mapped_column
 class Base(DeclarativeBase):
     # Auto-generate __tablename__ if not defined
     @declared_attr
-    def __tablename__(self, cls) -> str:
+    def __tablename__(self, cls: type["Base"]) -> str:
+        """Auto Generate table name is not provided."""
         return cls.__name__.lower()
 
 

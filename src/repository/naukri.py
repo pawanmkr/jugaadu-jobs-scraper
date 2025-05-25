@@ -28,8 +28,8 @@ async def create_naukri(db: AsyncSession, job: Job, keyword: str) -> Naukri:
     return naukri
 
 
-async def get_naukri_by_id(db: AsyncSession, id: int) -> Naukri | None:
-    result = await db.execute(select(Naukri).where(Naukri.id == id))
+async def get_naukri_by_id(db: AsyncSession, naukri_id: int) -> Naukri | None:
+    result = await db.execute(select(Naukri).where(Naukri.id == naukri_id))
     return result.scalar_one_or_none()
 
 

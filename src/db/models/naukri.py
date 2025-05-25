@@ -20,5 +20,9 @@ class Naukri(BaseModel, TimestampMixin):
     experience: Mapped[str] = mapped_column(nullable=True)
     vacancy: Mapped[int] = mapped_column(nullable=True)
 
-    def __repr__(self):
-        return f"Naukri(id={self.id}, title={self.title}, posted_on={self.posted_on}, experience={self.experience}, vacancy={self.vacancy})"
+    def __repr__(self) -> str:
+        """Return the string based representation of naukri fields for devs."""
+        return (
+            f"Naukri(id={self.id}, title={self.title}, posted_on={self.posted_on}, "
+            f"experience={self.experience}, vacancy={self.vacancy})"
+        )
