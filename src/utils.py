@@ -10,11 +10,11 @@ logger = logging.getLogger(__name__)
 def take_a_break(i: int):
     if i % 3 == 0:
         delay = random.uniform(5, 10)
-        print(f"[WAIT] Longer pause: {delay:.2f} seconds")
+        logger.info(f"[WAIT] Longer pause: {delay:.2f} seconds")
         time.sleep(delay)
     else:
         delay = random.uniform(2, 5)
-        print(f"[WAIT] Sleeping for {delay:.2f} seconds...")
+        logger.info(f"[WAIT] Sleeping for {delay:.2f} seconds...")
         time.sleep(delay)
 
 

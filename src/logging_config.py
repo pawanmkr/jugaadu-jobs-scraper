@@ -28,3 +28,9 @@ def setup_logging():
     root_logger.setLevel(logging.DEBUG)
     root_logger.addHandler(file_handler)
     root_logger.addHandler(console_handler)
+    
+    # Silence specific noisy libraries
+    logging.getLogger("aiosqlite").setLevel(logging.WARNING)
+    logging.getLogger("sqlalchemy.engine.Engine").setLevel(logging.WARNING)
+    logging.getLogger("sqlalchemy.engine").setLevel(logging.WARNING)
+

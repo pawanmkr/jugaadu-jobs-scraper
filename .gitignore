@@ -11,3 +11,10 @@ wheels/
 
 # environments
 .env
+
+# logs
+*.log
+*.log.*
+
+# mac
+.DS_Store

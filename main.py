@@ -8,7 +8,7 @@ from src.logging_config import setup_logging
 async def main():
     setup_logging()
     await init_models()
-    await fetch_jobs(keyword="node js developer", start_page=1, end_page=2)
+    await fetch_jobs(keyword="node js developer", start_page=16, end_page=1000)
 
 
 if __name__ == "__main__":

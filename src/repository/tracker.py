@@ -5,7 +5,7 @@ from src.db.models.tracker import Tracker
 
 async def create_tracker(db: AsyncSession, keyword: str, offset: int, total_jobs_collected: int) -> Tracker:
     tracker = Tracker(keyword=keyword, offset=offset, total_jobs_collected=total_jobs_collected)
-    await db.add(tracker)
+    db.add(tracker)
     await db.commit()
     await db.refresh(tracker)
     return tracker
